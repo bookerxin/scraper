@@ -24,8 +24,9 @@ def read_request(item: str = Query()):
     binUrlExtension = "&_sacat=0&LH_TitleDesc=0&rt=nc&_odkw=lg&_osacat=0&LH_BIN=1"
     auctionUrlExtension = "&_sacat=0&LH_TitleDesc=0&rt=nc&LH_Auction=1"
 
-    print(item)
+    print(f"Scraping for {item}...")
     auction_listings, buy_it_now_listings = Ebay().scraper(f'https://www.ebay.co.uk/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313&_nkw="{item}"')
 
+    print(buy_it_now_listings)
     # Simple Map - Need to differentiate auctions from buys
-    return DataframeHandler.buy_now_dataframe(buy_it_now_listings)
+    return buy_it_now_listings

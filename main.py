@@ -1,17 +1,8 @@
-from types import NoneType
 
 import os
-import sys
 import pyfiglet
 from api.routes import router
 from api.app import app
-
-from dataframes import DataframeHandler
-from targets import Ebay
-
-
-# from selenium import webdriver
-# from selenium.webdriver.common.keys import Keys
 
 class OptionsMenu:
     def __init__(self):

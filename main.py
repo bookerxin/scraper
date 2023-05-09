@@ -1,6 +1,8 @@
 
 import os
 import pyfiglet
+import uvicorn
+
 from api.routes import router
 from api.app import app
 
@@ -31,6 +33,6 @@ if __name__ == "__main__":
     app.include_router(router)
 
     # Make Subprocess
-    os.system('uvicorn main:app')
+    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
 
     # Idea is to give the program a terminal interface as well

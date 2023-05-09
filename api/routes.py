@@ -1,8 +1,8 @@
 from api.app import app
 from fastapi import APIRouter, Query
 
-from dataframes import DataframeHandler
-from targets import Ebay
+from dataframe.dataframe_handler import DataframeHandler
+from dto.targets import Ebay
 
 router = APIRouter()
 
@@ -27,6 +27,5 @@ def read_request(item: str = Query()):
     print(f"Scraping for {item}...")
     auction_listings, buy_it_now_listings = Ebay().scraper(f'https://www.ebay.co.uk/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313&_nkw="{item}"')
 
-    print(buy_it_now_listings)
     # Simple Map - Need to differentiate auctions from buys
     return buy_it_now_listings

@@ -1,9 +1,7 @@
-from types import NoneType
-
 import requests
 from bs4 import BeautifulSoup
 
-from listings import BuyNow, Auction
+from dto.listings import BuyNow, Auction
 
 
 class Ebay:
@@ -18,7 +16,8 @@ class Ebay:
         auction_listings = []
         buy_it_now_listings = []
 
-        soup = BeautifulSoup(html, 'html.parser')
+        soup = BeautifulSoup(html, 'html.parser', from_encoding='utf-8')
+
         listings = soup.find_all('div', {'class': 's-item__wrapper'})
 
         for i, listing in enumerate(listings):
@@ -27,6 +26,9 @@ class Ebay:
             condition = listing.find_next('div', {'class', 's-item__subtitle'}).find_next('span', {'class', 'SECONDARY_INFO'}).text
 
             price = listing.find_next('span', {'class': 's-item__price'}).text
+            price = float(price[1:]) if "to" not in price else list(map(lambda x: float(x.replace(',', '').strip()[1:]), price.split("to")))
+
+            print(price)
 
             seller_rating = listing.find_next('span', {'class', 's-item__seller-info-text'})
             seller_rating = seller_rating.text if seller_rating is not None else ''
